@@ -3,6 +3,12 @@ const randomWords = require('./RandomWords');
 
 const randomWordsLength = randomWords.length;
 
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
 module.exports = (options) => {
     let requestOptions = {
         method: options.method
@@ -13,7 +19,7 @@ module.exports = (options) => {
     }
 
     for (let i = 0; i < parseInt(options.iterations); i++) {
-        requestOptions.url = options.url.replace(/%/, randomWords[i % randomWordsLength]);
+        requestOptions.url = options.url.replace(/%/, randomWords[getRandomInt(0, randomWordsLength)]);
 
 	console.log(requestOptions);
 
