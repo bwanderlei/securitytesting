@@ -1,8 +1,7 @@
 const request = require('request');
-const randomstring = require('randomstring');
+const randomWords = require('./RandomWords');
 
-const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-const alphabetLength = alphabet.length;
+const randomWordsLength = randomWords.length;
 
 module.exports = (options) => {
     let requestOptions = {
@@ -13,8 +12,8 @@ module.exports = (options) => {
         requestOptions.json = options.json;
     }
 
-    for (let i = 0, a = 0; i < parseInt(options.iterations); i++) {
-        requestOptions.url = options.url.replace(/%/, randomstring.generate() + alphabet[a++ % alphabetLength]);
+    for (let i = 0; i < parseInt(options.iterations); i++) {
+        requestOptions.url = options.url.replace(/%/, randomWords[i % randomWordsLength]);
 
 	console.log(requestOptions);
 
